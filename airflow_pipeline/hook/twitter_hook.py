@@ -3,7 +3,7 @@ import requests
 from datetime import datetime, timedelta
 import json
 
-class TwitterRook (HttpHook):
+class TwitterHook (HttpHook):
     def __init__(self, end_time, start_time,query,conn_id=None):
         self.end_time = end_time
         self.start_time = start_time

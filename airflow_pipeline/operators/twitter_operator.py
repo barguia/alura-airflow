@@ -3,7 +3,7 @@ sys.path.append("airflow_pipeline")
 
 from airflow.models import BaseOperator, DAG, TaskInstance
 import json
-from hooks.twitter_hook import TwitterRook
+from hook.twitter_hook import TwitterHook
 from datetime import datetime, timedelta
 from os.path import join
 from pathlib import Path
@@ -33,7 +33,7 @@ class TwitterOperator(BaseOperator):
         self.create_parent_folders()
 
         with open(self.file_path, "w") as output_file:
-            for pg in TwitterRook(end_time, start_time, query).run():
+            for pg in TwitterHook(end_time, start_time, query).run():
                 self.log.info(pg)
                 json.dump(pg, output_file, ensure_ascii=False)
                 output_file.write("\n")
