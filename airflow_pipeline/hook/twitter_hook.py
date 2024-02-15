@@ -26,12 +26,16 @@ class TwitterHook (HttpHook):
     def connect_to_endpoint(self, url, session):
         request = requests.Request("GET", url)
         prep = session.prepare_request(request)
+        
         self.log.info(f"URL: {url}")
-        return self.run_and_check(session, prep, {})
+        response = self.run_and_check(session, prep, {'timeout': 2.75, 'check_response': False, 'loger': self.log})
+        
+        return response
 
     def paginate(self, url_raw, session):
         list_json_response = []
         response=self.connect_to_endpoint(url_raw, session)
+        self.log.info("after response")
         response_json = response.json()
         list_json_response.append(response_json)
 
@@ -57,5 +61,5 @@ if __name__ == "__main__":
     end_time = datetime.now().strftime(TIMESTAMP_FORMAT)
     start_time = (datetime.now() + timedelta(days=-7)).strftime(TIMESTAMP_FORMAT)
     query = "datascience"
-    for pg in TwitterRook(end_time, start_time, query).run():
+    for pg in TwitterHook(end_time, start_time, query).run():
         print(json.dumps(pg, indent=4, sort_keys=True))

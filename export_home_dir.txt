@@ -1,1 +1,3 @@
 export AIRFLOW_HOME=$(pwd)/airflow_pipeline
+export AIRFLOW_CONN_MYSQL_DEFAULT="mysql://user:password@localhost:3306/mysqldb"
+export NO_PROXY="*"

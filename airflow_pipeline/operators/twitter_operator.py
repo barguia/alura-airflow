@@ -43,11 +43,11 @@ if __name__ == "__main__":
     time_zone = datetime.now().astimezone().tzname()
     TIMESTAMP_FORMAT = f"%Y-%m-%dT%H:%M:%S.00{time_zone}:00"
     end_time = datetime.now().strftime(TIMESTAMP_FORMAT)
-    start_time = (datetime.now() + timedelta(days=-7)).strftime(TIMESTAMP_FORMAT)
+    start_time = (datetime.now() + timedelta(days=-10)).strftime(TIMESTAMP_FORMAT)
     query = "datascience"
     file_path = join(
         f'datalake/twitter_{query}', 
-        f"extract_date_{datetime.now().date()}",
+        f"extract_date={datetime.now().date()}",
         f"{query}_{datetime.now().date().strftime('%Y%m%d')}.json"
     )
     
